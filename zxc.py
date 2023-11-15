@@ -1,14 +1,15 @@
 
+
 from flask import Flask, Response , request
 from flask_cors import CORS
 from uuid import uuid4
-
-
+import json
 
 def delete_user(name):
     users.remove(name)
-name = ''
+name = []
 tokens = {}
+msg = ''
 
 app = Flask(__name__)
 CORS(app)
@@ -31,7 +32,7 @@ users = {
 def main():
     return "commands: /auth, /logout, /send, /getall"
 
-x = 'name'
+# x = 'name'
 @app.route("/auth")
 def auth(): 
     x = request.args.get('name')
@@ -43,7 +44,7 @@ def auth():
         return "Такой пользователь уже авторизован"
     else:
         print (x,token)
-        users['name'] = x
+        users['name'] = users
         tokens['token'] = token
         return x, token
 
@@ -58,23 +59,34 @@ def logout():
 def send():
     x = request.args.get('name')
     c = request.args.get('message')
+    x = users.get('name')
     if c == None:
         return "Ошибка отправки сообщения"
+    if x == None:
+        return "Пользователь сдох нахуй выблядок ебанный сын ебанной бляди отсталый сын бляди"
+    if tokens == None:
+        return "Ошибка токена"
     else:
-        print(c,x,tokens['token'])
-        return c,x,tokens['token']
+        print(x,c,tokens['token'])
+        return x,c,tokens['token']
 
 @app.route("/getall")
 def getall():
-    m = [
-        {'name': 'Max', 'message': '', 'timestamp':123},
-    ]
-    return "Hello, World!"
+    if request.args.get('token') not in users.values():
+        return Response("Иди нахуй")
+    # for key,value in users.items():
+    #     if value == tokens['token']:
+    #         return Response(json.dumps(msg))
 
 
 if __name__ == "__main__":
     print('RABOTAEM')
     app.run(debug=True)
+
+
+
+
+
 
 
 
