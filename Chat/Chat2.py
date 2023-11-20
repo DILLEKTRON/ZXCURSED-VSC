@@ -46,13 +46,13 @@ def auth():
         return "Ошибка авторизации"
     if username in users:
         return "Такой пользователь уже авторизован"
-    else:
-        token = generate_token()
-        print(f"Сгенерированный токен: {token}")
-        print (username,token)
-        users[username] = token
-        tokens[username] = token
-        return f"{username}, {token}"
+
+    token = generate_token()
+    print(f"Сгенерированный токен: {token}")
+    print (username,token)
+    users[username] = token
+    tokens[username] = token
+    return f"{username}, {token}"
 
 @app.route("/logout")
 def logout():
@@ -75,12 +75,12 @@ def send():
         return "Пользователь не найден"
     if username not in tokens:
         return "Ошибка токена"
-    else:
-        timestamp = datetime.datetime.now().isoformat()
-        msg_data = {"username": username, "message": message, "timestamp": timestamp}
-        messages.append(msg_data)
-        print(username, message)
-        return f"{username}, {message}"
+
+    timestamp = datetime.datetime.now().isoformat()
+    msg_data = {"username": username, "message": message, "timestamp": timestamp}
+    messages.append(msg_data)
+    print(username, message)
+    return f"{username}, {message}"
 
 # Это если надо токены выводить
 # tokens[username]
@@ -99,71 +99,3 @@ def getall():
 if __name__ == "__main__":
     print('RABOTAEM')
     app.run(debug=True)
-
-
-# for key,value in users.items():
-#     if value == users['name']:
-#         del users[key]
-# return "Вы  успешно вышли"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    #     if value == tokens['token']:
-    #         return Response(json.dumps(msg))
-
-
-if __name__ == "__main__":
-    print('RABOTAEM')
-    app.run(debug=True)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
