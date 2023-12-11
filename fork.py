@@ -45,11 +45,35 @@ dict = {
 }
 
 while True:
-    name = input("Enter name: ")
-    if dict.get(name) == None:
-        print('NO') 
-        continue
-    print(dict.get(name))
+    name = input("Enter name (or 'exit' to stop): ")
+    
+    if name.lower() == 'exit':
+        break
+    
+    age = dict.get(name)
+    
+    if age is None:
+        print('NO SUCH PERSON')
+    else:
+        print(f"The age of {name} is {age}")
+
+people = {}
+
+while True:
+    name = input("Enter name (or 'exit' to stop): ")
+    
+    if name.lower() == 'exit':
+        break
+    
+    age = int(input(f"Enter age for {name}: "))
+    people[name] = age
+    
+    # Выводим человека с самым большим возрастом
+    max_age_person = max(people, key=people.get)
+    print(f"The person with the highest age is {max_age_person} with age {people[max_age_person]}")
+
+print("Final dictionary:", people)
+
 
 # Задача 2
 #  у вас есть пустой словарь 
