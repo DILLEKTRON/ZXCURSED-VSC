@@ -14,7 +14,7 @@ def zxc_start(message):
 
 @bot.message_handler(commands=['help'])
 def zxc_help(message):
-    bot.send_message(message.chat.id, 'Команды для старта: start, Привет')
+    bot.send_message(message.chat.id, 'Команды для старта: start, Привет. Команда для выбора марки: beer')
 
 @bot.message_handler(content_types=['text'])
 def zxc_text(message):
